@@ -58,7 +58,7 @@ void Funcionario::setHorasPendentes(float horasPendentes)
     this->horasPendentes = horasPendentes;
 }
 
-void Funcionario::cadastraPonto()
+void Funcionario::cadastraPonto() // Dado uma hora de início e uma de final, a função conta e adiciona horas trabalhadas e extras, e subtrai de horas pendentes
 {
     string horarioInicio;
     string horarioFinal;

@@ -31,6 +31,6 @@ void Pessoa::setSenha(string senha){
     this->senha = senha;
 }
 
-bool Pessoa::verificarAutenticacao(string usuario, string senha){
+bool Pessoa::verificarAutenticacao(string usuario, string senha){ // Função para verificar senha do chefe ou funcionário
     return (this->usuario == usuario && this->senha == senha);
 }

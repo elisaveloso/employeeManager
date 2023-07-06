@@ -1,3 +1,9 @@
+/* GRUPO: BRUNA CRISTINA GONCALVES - 20.2.4123
+          ELISA ALVES VELOSO - 20.2.4006
+          LAVÍNIA FONSECA PEREIRA - 19.1.4170
+          LUCAS GOMES DOS SANTOS - 20.1.4108
+
+*/
 #include <iostream>
 #include <vector>
 #include "Chefe.h"
@@ -21,7 +27,7 @@ int main()
     cin >> senha;
     Chefe chefe(nome, usuario, senha);
 
-    vector<Funcionario *> funcionarios;
+    vector<Funcionario *> funcionarios;  // Vetor de ponteiros para guardar todos os funcionários
     MenuChefe menuChefe;
 
     while (true)
@@ -42,7 +48,7 @@ int main()
             cout << "Digite a senha do chefe: ";
             cin >> senha;
 
-            if (chefe.verificarAutenticacao(usuario, senha))
+            if (chefe.verificarAutenticacao(usuario, senha)) // Verifica autenticação do chefe
             {
                 while (true)
                 {
@@ -57,10 +63,10 @@ int main()
 
                     if (opcao == 1)
                     {
-                        Funcionario *novoFuncionario = menuChefe.cadastrarFuncionario();
+                        Funcionario *novoFuncionario = menuChefe.cadastrarFuncionario(); // Cadastra novo funcionário
                         if (novoFuncionario != nullptr)
                         {
-                            funcionarios.push_back(novoFuncionario);
+                            funcionarios.push_back(novoFuncionario); // Adiciona novo funcionário ao vetor de funcionários
                             cout << "Funcionário cadastrado com sucesso!" << endl;
                         }
                         else
@@ -70,7 +76,7 @@ int main()
                     }
                     else if (opcao == 2)
                     {
-                        menuChefe.listarFuncionarios(funcionarios);
+                        menuChefe.listarFuncionarios(funcionarios); // Lista os funcionários cadastrados
                     }
                     else if (opcao == 3)
                     {
@@ -83,7 +89,7 @@ int main()
                         {
                             if (funcionario->getNome() == nomeFuncionario)
                             {
-                                menuChefe.checarPonto(*funcionario);
+                                menuChefe.checarPonto(*funcionario); // Checa as horas de um funcionário
                                 encontrado = true;
                                 break;
                             }
@@ -108,11 +114,11 @@ int main()
                                 encontrado = true;
                                 if (Vendedor *vendedor = dynamic_cast<Vendedor *>(funcionario))
                                 {
-                                    vendedor->exibirSalarioVendedor();
+                                    vendedor->exibirSalarioVendedor(); // Calcula salário vendedor
                                 }
                                 else if (Supervisor *supervisor = dynamic_cast<Supervisor *>(funcionario))
                                 {
-                                    supervisor->exibirSalarioSupervisor();
+                                    supervisor->exibirSalarioSupervisor(); // Calcula salário supervisor
                                 }
 
                                 break;
@@ -126,7 +132,7 @@ int main()
                     }
                     else if (opcao == 5)
                     {
-                        break;
+                        break; // Retorna a tela principal
                     }
                     else
                     {
@@ -141,6 +147,7 @@ int main()
         }
         else if (opcao == 2)
         { // Menu dos funcionários
+            string usuario, senha;
             cout << "Digite o usuário do funcionário:" << endl;
             cin >> usuario;
             cout << "Digite a senha do funcionário:" << endl;
@@ -150,7 +157,7 @@ int main()
             Funcionario *funcionarioAutenticado = nullptr;
             for (Funcionario *funcionario : funcionarios)
             {
-                if (funcionario->verificarAutenticacao(usuario, senha))
+                if (funcionario->verificarAutenticacao(usuario, senha)) // Verifica autenticação do funcionário
                 {
                     encontrado = true;
                     funcionarioAutenticado = funcionario;
@@ -160,8 +167,7 @@ int main()
 
             if (encontrado)
             {
-                int opcaoFuncionario;
-                do
+                while(true)
                 {
                     cout << "=== Menu dos Funcionários ===" << endl;
                     cout << "Selecione a opção desejada:" << endl;
@@ -169,18 +175,16 @@ int main()
                     cout << "2. Exibir salário detalhado" << endl;
                     cout << "3. Cadastrar venda" << endl;
                     cout << "4. Listar vendas" << endl;
-                    cout << "5. Retornar à tela inicial" << endl;
-                    cout << "6. Adicionar um vendedor a um supervisor" << endl;
+                    cout << "5. Adicionar um vendedor a um supervisor" << endl;
+                    cout << "6. Retornar à tela inicial" << endl;
                     cout << "Opção: ";
-                    cin >> opcaoFuncionario;
+                    cin >> opcao;
 
-                    switch (opcaoFuncionario)
+                    if(opcao == 1)
                     {
-                    case 1:
-                        // Cadastrar ponto
-                        funcionarioAutenticado->cadastraPonto();
-                        break;
-                    case 2:
+                        funcionarioAutenticado->cadastraPonto(); // Registra o ponto do funcionário
+                    }
+                    else if(opcao == 2){
                         // Exibir salário detalhado
                         if (Vendedor *vendedor = dynamic_cast<Vendedor *>(funcionarioAutenticado))
                         {
@@ -194,9 +198,9 @@ int main()
                         {
                             cout << "Funcionário não tem salário detalhado" << endl;
                         }
-                        break;
-                    case 3:
-                        // Cadastrar venda
+                    }
+                    else if (opcao == 3){
+                        // Cadastrar venda de um vendedor
                         if (Vendedor *vendedor = dynamic_cast<Vendedor *>(funcionarioAutenticado))
                         {
                             vendedor->adicionarVendas();
@@ -205,8 +209,9 @@ int main()
                         {
                             cout << "Apenas vendedores podem cadastrar vendas" << endl;
                         }
-                        break;
-                    case 4:
+                    }
+                    else if(opcao == 4)
+                    {
                         // Listar vendas
                         if (Supervisor *supervisor = dynamic_cast<Supervisor *>(funcionarioAutenticado))
                         {
@@ -216,11 +221,9 @@ int main()
                         {
                             cout << "Vendas realizadas: " << vendedor->getVendas() << endl;
                         }
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        // Adicionar Vendedor
+                    }
+                    else if(opcao == 5){
+                        // Adiciona Vendedor a um Supervisor
                         if (Supervisor *supervisor = dynamic_cast<Supervisor *>(funcionarioAutenticado))
                         {
                             string nomeVendedor;
@@ -255,20 +258,20 @@ int main()
                         {
                             cout << "Apenas supervisores podem adicionar vendedores" << endl;
                         }
-
-                        break;
-                    default:
-                        cout << "Opção inválida." << endl;
+                    }
+                    else if(opcao == 6)
+                    {
                         break;
                     }
-                } while (opcaoFuncionario != 6);
+                    else{
+                        cout << "Opção inválida." << endl;
+                    }
+                }
             }
             else
             {
                 cout << "Usuário ou senha incorretos. Acesso negado." << endl;
             }
-
-            break;
         }
         else if (opcao == 3)
         {
@@ -281,7 +284,7 @@ int main()
         }
     }
 
-    // Liberar a memória dos funcionários
+    // Libera a memória dos funcionários alocados dinamicamente
     for (Funcionario *funcionario : funcionarios)
     {
         delete funcionario;

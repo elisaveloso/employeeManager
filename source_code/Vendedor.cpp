@@ -16,14 +16,14 @@ void Vendedor::setVendas(float vendas) {
     this->vendas = vendas;
 }
 
-void Vendedor::adicionarVendas(){
+void Vendedor::adicionarVendas(){ // Função para cadastrar uma venda
     float valor;
     cout << "Digite o valor da venda: ";
     cin >> valor;
     vendas += valor;
 }
 
-void Vendedor::exibirSalarioVendedor() {
+void Vendedor::exibirSalarioVendedor() { // Calculo do salário do vendedor, levando em conta 100% a hora extra e 10% de bonificação sobre as vendas
     float salarioTotal = 0;
     salarioTotal = (horasTrabalhadas + (horasExtra * 2)) * salarioHora + (vendas * 0.1);
     

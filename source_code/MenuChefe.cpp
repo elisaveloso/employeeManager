@@ -1,6 +1,6 @@
 #include "MenuChefe.h"
 
-Funcionario* MenuChefe::cadastrarFuncionario() {
+Funcionario* MenuChefe::cadastrarFuncionario() { // Função para cadastrar um novo funcionário no sistema
     string nome, usuario, senha, funcaoFuncionario;
     float salarioHora = 0.0;
     float horasTrabalhadas = 0.0;
@@ -20,7 +20,7 @@ Funcionario* MenuChefe::cadastrarFuncionario() {
 
     Funcionario* novoFuncionario = nullptr;
 
-    if (funcaoFuncionario == "vendedor") {
+    if (funcaoFuncionario == "vendedor") { // Cria o novo funcionário de acordo com sua função
         float vendas = 0.0;
         novoFuncionario = new Vendedor(nome, usuario, senha, funcaoFuncionario, salarioHora, horasTrabalhadas, horasExtra, horasPendentes, vendas);
     } else if (funcaoFuncionario == "supervisor") {
@@ -36,7 +36,7 @@ Funcionario* MenuChefe::cadastrarFuncionario() {
 }
 
 
-void MenuChefe::listarFuncionarios(const vector<Funcionario*>& funcionarios) {
+void MenuChefe::listarFuncionarios(const vector<Funcionario*>& funcionarios) { // Recebe todos os funcionários do sistema e lista
     cout << "Lista de Funcionários:" << endl;
     for (const Funcionario* funcionario : funcionarios) {
         cout << "Nome: " << funcionario->getNome() << endl;
@@ -46,7 +46,7 @@ void MenuChefe::listarFuncionarios(const vector<Funcionario*>& funcionarios) {
     }
 }
 
-void MenuChefe::checarPonto(Funcionario& funcionario) {
+void MenuChefe::checarPonto(Funcionario& funcionario) { // Retorna as horas trabalhadas, extras e pendentes de um funcionário
     cout << "Nome do funcionario: " << funcionario.getNome() << endl;
     cout << "Horas Trabalhadas: " << funcionario.getHorasTrabalhadas() << endl;
     cout << "Horas Extras: " << funcionario.getHorasExtra() << endl;

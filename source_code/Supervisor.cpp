@@ -12,11 +12,11 @@ const vector<Vendedor*>& Supervisor::getVendedores() const {
     return vendedores;
 }
 
-void Supervisor::addVendedor(Vendedor* vendedor) {
+void Supervisor::addVendedor(Vendedor* vendedor) { // Adiciona um vendedor a um supervisor
     vendedores.push_back(vendedor);
 }
 
-void Supervisor::listarVendasVendedores() {
+void Supervisor::listarVendasVendedores() { // Lista todas as vendas dos vendedores da variável do supervisor
     for (Vendedor* vendedor : vendedores) {
         cout << "Nome do vendedor: " << vendedor->getNome() << endl;
         cout << "Vendas: " << vendedor->getVendas() << endl;
@@ -26,7 +26,7 @@ void Supervisor::listarVendasVendedores() {
     cout << "Total de vendas dos vendedores: " << totalVendas << endl;
 }
 
-void Supervisor::exibirSalarioSupervisor() {
+void Supervisor::exibirSalarioSupervisor() { // Calcula o salário do supervisor, com 150% a hora extra e 1% de bonificação em cima da venda de todos os vendedores associados a ele
     float salarioTotal = 0;
     salarioTotal = (horasTrabalhadas + (horasExtra * 2.5)) * salarioHora;
     // Calcula a bonificação dos vendedores
